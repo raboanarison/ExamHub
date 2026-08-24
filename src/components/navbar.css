@@ -1,0 +1,28 @@
+.navbar {
+  background-color: #2563eb;
+  color: white;
+  padding: 15px 30px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 20px;
+}
+
+.navbar a {
+    color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.logout-btn {
+  background-color: white;
+  color: #2563eb;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+}

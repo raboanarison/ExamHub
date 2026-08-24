@@ -14,7 +14,7 @@ export const exams = [
   {
     id: 3,
     title: "Spring Boot",
-    description: "Examen Spring",
+    description: "Examen Spring Boot",
     duration: 90
   }
 ];

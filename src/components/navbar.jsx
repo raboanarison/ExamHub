@@ -1,28 +1,36 @@
 import { Link, useNavigate } from "react-router-dom";
+import "./Navbar.css";
 
 export default function Navbar() {
   const navigate = useNavigate();
 
-  const logout = () => {
+  const handleLogout = () => {
     localStorage.clear();
     navigate("/login");
   };
 
   return (
-    <nav>
-      <Link to="/student">Examens</Link>
+    <nav className="navbar">
 
-      {" | "}
+      <h2>Exam Hub</h2>
 
-      <Link to="/student/results">
-        Mes résultats
-      </Link>
+      <div className="navbar-links">
+        <Link to="/student">
+          Examens
+        </Link>
 
-      {" | "}
+        <Link to="/student/results">
+          Mes résultats
+        </Link>
+      </div>
 
-      <button onClick={logout}>
+      <button
+        className="logout-btn"
+        onClick={handleLogout}
+      >
         Déconnexion
       </button>
+
     </nav>
   );
 }

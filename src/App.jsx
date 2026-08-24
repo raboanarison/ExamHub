@@ -6,9 +6,8 @@ import StudentDashboard from "./pages/student/StudentDashboard";
 import StudentExam from "./pages/student/StudentExam";
 import StudentResult from "./pages/student/StudentResult";
 import StudentResults from "./pages/student/StudentResults";
-
 import ProtectedRoute from "./routes/ProtectedRoute";
-
+import NotFound from "./pages/NotFound";
 function App() {
   return (
     <BrowserRouter>
@@ -55,6 +54,7 @@ function App() {
           }
         />
 
+<Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

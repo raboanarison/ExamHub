@@ -4,100 +4,100 @@ import "./CreateQuestionPage.css";
 
 export default function EditQuestionPage() {
 
-  const { id } = useParams();
+    const { id } = useParams();
 
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  const [question, setQuestion] = useState("");
-  const [examId, setExamId] = useState("");
-  const [exams, setExams] = useState([]);
+    const [question, setQuestion] = useState("");
+    const [examId, setExamId] = useState("");
+    const [exams, setExams] = useState([]);
 
-  useEffect(() => {
+    useEffect(() => {
 
-    const savedExams =
-      JSON.parse(localStorage.getItem("exams")) || [];
+        const savedExams =
+            JSON.parse(localStorage.getItem("exams")) || [];
 
-    setExams(savedExams);
+        setExams(savedExams);
 
-    const questions =
-      JSON.parse(localStorage.getItem("questions")) || [];
+        const questions =
+            JSON.parse(localStorage.getItem("questions")) || [];
 
-    const foundQuestion =
-      questions.find(
-        q => q.id === Number(id)
-      );
+        const foundQuestion =
+            questions.find(
+                q => q.id === Number(id)
+            );
 
-    if (foundQuestion) {
-      setQuestion(foundQuestion.text);
-      setExamId(foundQuestion.examId || "");
-    }
+        if (foundQuestion) {
+            setQuestion(foundQuestion.text);
+            setExamId(foundQuestion.examId || "");
+        }
 
-  }, [id]);
+    }, [id]);
 
-  const handleSubmit = (e) => {
+    const handleSubmit = (e) => {
 
-    e.preventDefault();
+        e.preventDefault();
 
-    const questions =
-      JSON.parse(localStorage.getItem("questions")) || [];
+        const questions =
+            JSON.parse(localStorage.getItem("questions")) || [];
 
-    const updatedQuestions =
-      questions.map(q =>
-        q.id === Number(id)
-          ? {
-              ...q,
-              text: question,
-              examId: Number(examId)
-            }
-          : q
-      );
+        const updatedQuestions =
+            questions.map(q =>
+                q.id === Number(id)
+                    ? {
+                        ...q,
+                        text: question,
+                        examId: Number(examId)
+                    }
+                    : q
+            );
 
-    localStorage.setItem(
-      "questions",
-      JSON.stringify(updatedQuestions)
+        localStorage.setItem(
+            "questions",
+            JSON.stringify(updatedQuestions)
+        );
+
+        navigate("/admin/questions");
+    };
+
+    return (
+        <div className="create-question-page">
+
+            <h1>Modifier question</h1>
+
+            <form onSubmit={handleSubmit}>
+
+                <textarea
+                    value={question}
+                    onChange={(e) => setQuestion(e.target.value)}
+                    required
+                />
+
+                <select
+                    value={examId}
+                    onChange={(e) => setExamId(e.target.value)}
+                    required
+                >
+                    <option value="">
+                        Choisir un examen
+                    </option>
+
+                    {exams.map((exam) => (
+                        <option
+                            key={exam.id}
+                            value={exam.id}
+                        >
+                            {exam.title}
+                        </option>
+                    ))}
+                </select>
+
+                <button type="submit">
+                    Modifier
+                </button>
+
+            </form>
+
+        </div>
     );
-
-    navigate("/admin/questions");
-  };
-
-  return (
-    <div className="create-question-page">
-
-      <h1>Modifier question</h1>
-
-      <form onSubmit={handleSubmit}>
-
-        <textarea
-          value={question}
-          onChange={(e) => setQuestion(e.target.value)}
-          required
-        />
-
-        <select
-          value={examId}
-          onChange={(e) => setExamId(e.target.value)}
-          required
-        >
-          <option value="">
-            Choisir un examen
-          </option>
-
-          {exams.map((exam) => (
-            <option
-              key={exam.id}
-              value={exam.id}
-            >
-              {exam.title}
-            </option>
-          ))}
-        </select>
-
-        <button type="submit">
-          Modifier
-        </button>
-
-      </form>
-
-    </div>
-  );
 }

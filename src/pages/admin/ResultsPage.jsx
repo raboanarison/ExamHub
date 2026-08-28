@@ -3,144 +3,144 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
-  FaPlus,
-  FaEdit,
-  FaTrash
+    FaPlus,
+    FaEdit,
+    FaTrash
 } from "react-icons/fa";
 
 export default function ResultsPage() {
 
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  const [results, setResults] = useState([]);
+    const [results, setResults] = useState([]);
 
-  useEffect(() => {
+    useEffect(() => {
 
-    const savedResults =
-      localStorage.getItem("results");
+        const savedResults =
+            localStorage.getItem("results");
 
-    if(savedResults){
+        if (savedResults) {
 
-      setResults(
-        JSON.parse(savedResults)
-      );
+            setResults(
+                JSON.parse(savedResults)
+            );
 
-    }else{
+        } else {
 
-      const defaultResults = [
-        {
-          id:1,
-          student:"Amin",
-          exam:"Java",
-          score:16
-        },
-        {
-          id:2,
-          student:"Fanilo",
-          exam:"React",
-          score:18
+            const defaultResults = [
+                {
+                    id: 1,
+                    student: "Amin",
+                    exam: "Java",
+                    score: 16
+                },
+                {
+                    id: 2,
+                    student: "Fanilo",
+                    exam: "React",
+                    score: 18
+                }
+            ];
+
+            localStorage.setItem(
+                "results",
+                JSON.stringify(defaultResults)
+            );
+
+            setResults(defaultResults);
         }
-      ];
 
-      localStorage.setItem(
-        "results",
-        JSON.stringify(defaultResults)
-      );
+    }, []);
 
-      setResults(defaultResults);
-    }
+    const deleteResult = (id) => {
 
-  }, []);
+        const updatedResults =
+            results.filter(
+                result => result.id !== id
+            );
 
-  const deleteResult = (id) => {
+        setResults(updatedResults);
 
-    const updatedResults =
-      results.filter(
-        result => result.id !== id
-      );
+        localStorage.setItem(
+            "results",
+            JSON.stringify(updatedResults)
+        );
+    };
 
-    setResults(updatedResults);
+    return (
+        <div className="results-page">
 
-    localStorage.setItem(
-      "results",
-      JSON.stringify(updatedResults)
+            <div className="page-header">
+
+                <h1>Résultats</h1>
+
+                <button
+                    className="add-btn"
+                    onClick={() =>
+                        navigate("/admin/results/create")
+                    }
+                >
+                    <FaPlus />
+                    Ajouter résultat
+                </button>
+
+            </div>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Étudiant</th>
+                        <th>Examen</th>
+                        <th>Note</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {results.map((result) => (
+
+                        <tr key={result.id}>
+
+                            <td>{result.student}</td>
+
+                            <td>{result.exam}</td>
+
+                            <td>{result.score}/20</td>
+
+                            <td className="actions">
+
+                                <button
+                                    className="edit-btn"
+                                    onClick={() =>
+                                        navigate(
+                                            `/admin/results/edit/${result.id}`
+                                        )
+                                    }
+                                >
+                                    <FaEdit />
+                                </button>
+
+                                <button
+                                    className="delete-btn"
+                                    onClick={() =>
+                                        deleteResult(result.id)
+                                    }
+                                >
+                                    <FaTrash />
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    ))}
+
+                </tbody>
+
+            </table>
+
+        </div>
     );
-  };
-
-  return (
-    <div className="results-page">
-
-      <div className="page-header">
-
-        <h1>Résultats</h1>
-
-        <button
-          className="add-btn"
-          onClick={() =>
-            navigate("/admin/results/create")
-          }
-        >
-          <FaPlus />
-          Ajouter résultat
-        </button>
-
-      </div>
-
-      <table>
-
-        <thead>
-          <tr>
-            <th>Étudiant</th>
-            <th>Examen</th>
-            <th>Note</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-
-        <tbody>
-
-          {results.map((result) => (
-
-            <tr key={result.id}>
-
-              <td>{result.student}</td>
-
-              <td>{result.exam}</td>
-
-              <td>{result.score}/20</td>
-
-              <td className="actions">
-
-                <button
-                  className="edit-btn"
-                  onClick={() =>
-                    navigate(
-                      `/admin/results/edit/${result.id}`
-                    )
-                  }
-                >
-                  <FaEdit />
-                </button>
-
-                <button
-                  className="delete-btn"
-                  onClick={() =>
-                    deleteResult(result.id)
-                  }
-                >
-                  <FaTrash />
-                </button>
-
-              </td>
-
-            </tr>
-
-          ))}
-
-        </tbody>
-
-      </table>
-
-    </div>
-  );
 }

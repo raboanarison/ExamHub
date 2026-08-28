@@ -419,11 +419,9 @@ tbody tr:hover {
 }
 
 .dark-mode {
-    background: linear-gradient(
-        135deg,
-        #0f172a,
-        #111827
-    );
+    background: linear-gradient(135deg,
+            #0f172a,
+            #111827);
     color: #f8fafc;
 }
 

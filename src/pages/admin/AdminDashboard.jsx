@@ -65,8 +65,8 @@ export default function AdminDashboard() {
         }
     }, [darkMode]);
 
-const courses =
-  JSON.parse(localStorage.getItem("courses")) || [];
+    const courses =
+        JSON.parse(localStorage.getItem("courses")) || [];
     return (
         <div className="admin-dashboard">
 
@@ -216,27 +216,27 @@ const courses =
                         </tr>
                     </thead>
 
-                 <tbody>
+                    <tbody>
 
-  {courses.map((course) => (
+                        {courses.map((course) => (
 
-    <tr key={course.id}>
+                            <tr key={course.id}>
 
-      <td>{course.title}</td>
+                                <td>{course.title}</td>
 
-      <td>
-        <span className="status active">
-          En cours
-        </span>
-      </td>
+                                <td>
+                                    <span className="status active">
+                                        En cours
+                                    </span>
+                                </td>
 
-      <td>0</td>
+                                <td>0</td>
 
-    </tr>
+                            </tr>
 
-  ))}
+                        ))}
 
-</tbody>
+                    </tbody>
 
                 </table>
 

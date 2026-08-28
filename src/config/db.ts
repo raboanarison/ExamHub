@@ -10,3 +10,7 @@ export const pool = new Pool({
   password: process.env.DB_PASSWORD,
   port: Number(process.env.DB_PORT) || 5432,
 });
+
+pool.query('SELECT NOW()')
+  .then(() => console.log('Connecté à PostgreSQL'))
+  .catch((err) => console.error('Erreur de connexion à PostgreSQL :', err.message));

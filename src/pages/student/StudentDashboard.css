@@ -15,8 +15,8 @@
   border-radius: 10px;
 
   box-shadow:
-    0 2px 5px rgba(0,0,0,0.1);
-    text-align: center;
+    0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
 .exam-btn {
@@ -30,8 +30,9 @@
   border-radius: 5px;
 
   margin-top: 10px;
-text-decoration: none;
+  text-decoration: none;
 }
+
 .exam-btn:hover {
   transform: translateY(-2px);
   transition: 0.2s;

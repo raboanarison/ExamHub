@@ -1,0 +1,64 @@
+.create-student-page{
+    max-width:600px;
+    margin:auto;
+    padding:30px;
+}
+
+.create-student-page h1{
+    color:#065f46;
+    margin-bottom:25px;
+}
+
+.create-student-page form{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.create-student-page input{
+    padding:15px;
+    border:1px solid #d1d5db;
+    border-radius:12px;
+    font-size:16px;
+    outline:none;
+}
+
+.create-student-page input:focus{
+    border-color:#10b981;
+}
+
+.create-student-page button{
+    border:none;
+    padding:15px;
+    border-radius:12px;
+    cursor:pointer;
+    color:white;
+    font-weight:600;
+    background:linear-gradient(
+        135deg,
+        #047857,
+        #10b981
+    );
+}
+
+.dark-mode .create-student-page h1{
+    color:#34d399;
+}
+
+.dark-mode .create-student-page form{
+    background:#1e293b;
+}
+
+.dark-mode .create-student-page input{
+    background:#0f172a;
+    color:white;
+    border:1px solid #334155;
+}
+
+.dark-mode .create-student-page input::placeholder{
+    color:#94a3b8;
+}

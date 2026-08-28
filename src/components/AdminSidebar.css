@@ -1,68 +1,66 @@
-.admin-navbar{
-  position: fixed;
-  top: 0;
-  left: 0;
+.admin-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
 
-  width: 100%;
+    width: 100%;
 
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-   background:linear-gradient(
-    135deg,
-    #047857,
-    #10b981
-  );
-  padding:15px 40px;
+    background: linear-gradient(135deg,
+            #047857,
+            #10b981);
+    padding: 15px 40px;
 
-  box-sizing:border-box;
+    box-sizing: border-box;
 
-  z-index:1000;
+    z-index: 1000;
 }
 
-.logo{
-  color:white;
-  font-size:30px;
-  font-weight:bold;
+.logo {
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
 }
 
-.nav-links{
-  display:flex;
-  gap:25px;
+.nav-links {
+    display: flex;
+    gap: 25px;
 }
 
-.nav-links a{
-  color:white;
-  text-decoration:none;
-  font-weight:600;
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
 }
 
-.nav-links a:hover{
-  opacity:.8;
+.nav-links a:hover {
+    opacity: .8;
 }
 
-.admin-info{
-  display:flex;
-  align-items:center;
-  gap:15px;
-  color:white;
+.admin-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: white;
 }
 
-.admin-info button{
-  background:#ffffff20;
-  color:white;
-  border:1px solid #ffffff40;
-  padding:10px 20px;
-  border-radius:12px;
-  cursor:pointer;
-  font-weight:600;
-  transition:.3s;
-  backdrop-filter:blur(10px);
+.admin-info button {
+    background: #ffffff20;
+    color: white;
+    border: 1px solid #ffffff40;
+    padding: 10px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: .3s;
+    backdrop-filter: blur(10px);
 }
 
-.admin-info button:hover{
-  background:white;
-  color:#059669;
-  transform:translateY(-2px);
+.admin-info button:hover {
+    background: white;
+    color: #059669;
+    transform: translateY(-2px);
 }

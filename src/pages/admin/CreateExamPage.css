@@ -1,0 +1,40 @@
+.create-exam-page{
+  max-width:600px;
+  margin:auto;
+}
+
+.create-exam-page h1{
+  color:#065f46;
+  margin-bottom:20px;
+}
+
+.create-exam-page form{
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+
+.create-exam-page input{
+  padding:15px;
+  border:1px solid #d1d5db;
+  border-radius:12px;
+}
+
+.create-exam-page button{
+  padding:15px;
+  border:none;
+  border-radius:12px;
+  background:#10b981;
+  color:white;
+  cursor:pointer;
+}
+
+.dark-mode .create-exam-page h1{
+  color:#34d399;
+}
+
+.dark-mode .create-exam-page input{
+  background:#1e293b;
+  color:white;
+  border:1px solid #334155;
+}

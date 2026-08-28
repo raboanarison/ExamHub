@@ -1,0 +1,48 @@
+.questions-page {
+  padding: 20px;
+}
+
+.questions-page h1 {
+  color: #065f46;
+  margin-bottom: 20px;
+}
+
+.question-card {
+  background: white;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,.08);
+}
+
+.question-card h3 {
+  color: #10b981;
+  margin-bottom: 10px;
+}
+
+/* DARK MODE */
+
+.dark-mode .questions-page {
+  color: #f8fafc;
+}
+
+.dark-mode .questions-page h1 {
+  color: #34d399;
+}
+
+.dark-mode .question-card {
+  background: #1e293b;
+}
+
+.dark-mode .question-card h3 {
+  color: #34d399;
+}
+
+.dark-mode .question-card p {
+  color: #f8fafc;
+}
+.exam-name{
+  margin-top:10px;
+  color:#10b981;
+  font-weight:600;
+}

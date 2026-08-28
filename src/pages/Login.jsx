@@ -7,29 +7,29 @@ export default function Login() {
 
   const navigate = useNavigate();
 
-const handleLogin = () => {
-  if (!email || !password) {
-    alert("Veuillez remplir tous les champs");
-    return;
-  }
+  const handleLogin = () => {
+    if (!email || !password) {
+      alert("Veuillez remplir tous les champs");
+      return;
+    }
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  if (!emailRegex.test(email)) {
-    alert("Veuillez entrer une adresse email valide");
-    return;
-  }
+    if (!emailRegex.test(email)) {
+      alert("Veuillez entrer une adresse email valide");
+      return;
+    }
 
-  if (password.length < 6) {
-    alert("Le mot de passe doit contenir au moins 6 caractères");
-    return;
-  }
+    if (password.length < 6) {
+      alert("Le mot de passe doit contenir au moins 6 caractères");
+      return;
+    }
 
-  localStorage.setItem("token", "fake-token");
-  localStorage.setItem("role", "student");
+    localStorage.setItem("token", "fake-token");
+    localStorage.setItem("role", "student");
 
-  navigate("/student");
-};
+    navigate("/student");
+  };
 
   return (
     <div>

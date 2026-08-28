@@ -1,34 +1,63 @@
 import { Link } from "react-router-dom";
-import { exams } from "../../data/exams";
+import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import "./StudentDashboard.css";
+
 export default function StudentDashboard() {
+
+  const [exams, setExams] = useState([]);
+
+  useEffect(() => {
+
+    const savedExams =
+      JSON.parse(localStorage.getItem("exams")) || [];
+
+    setExams(savedExams);
+
+  }, []);
+
   return (
-    <div  className="dashboard">
+    <div className="dashboard">
 
       <Navbar />
 
-      <h1  className="dashboard-title">
-        Examens disponibles 
-        </h1>
+      <h1 className="dashboard-title">
+        Examens disponibles
+      </h1>
 
-      {exams.map((exam) => (
-        <div key={exam.id}
-             className="exam-card" >
-          <h3>{exam.title}</h3>
+      {exams.length === 0 ? (
 
-          <p>{exam.description}</p>
+        <p>Aucun examen disponible.</p>
 
-          <p>Durée : {exam.duration} min</p>
+      ) : (
 
-          <Link  className="exam-btn"
-                 to={`/student/exams/${exam.id}`}>
-            Passer l'examen
-          </Link>
-<hr />
-          
-        </div>
-      ))}
+        exams.map((exam) => (
+
+          <div
+            key={exam.id}
+            className="exam-card"
+          >
+
+            <h3>{exam.title}</h3>
+
+            <p>
+              Durée : {exam.duration} min
+            </p>
+
+            <Link
+              className="exam-btn"
+              to={`/student/exams/${exam.id}`}
+            >
+              Passer l'examen
+            </Link>
+
+            <hr />
+
+          </div>
+
+        ))
+
+      )}
 
     </div>
   );

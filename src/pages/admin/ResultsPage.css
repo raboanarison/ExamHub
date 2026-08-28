@@ -1,0 +1,49 @@
+.results-page {
+  padding: 20px;
+}
+
+.results-page h1 {
+  color: #065f46;
+  margin-bottom: 20px;
+}
+
+.results-page table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.results-page th,
+.results-page td {
+  padding: 15px;
+  text-align: center;
+}
+
+.results-page thead {
+  background: #10b981;
+  color: white;
+}
+
+/* DARK MODE */
+
+.dark-mode .results-page {
+  color: #f8fafc;
+}
+
+.dark-mode .results-page h1 {
+  color: #34d399;
+}
+
+.dark-mode .results-page table {
+  background: #1e293b;
+}
+
+.dark-mode .results-page td {
+  color: #f8fafc;
+}
+
+.dark-mode .results-page tbody tr:hover {
+  background: #334155;
+}

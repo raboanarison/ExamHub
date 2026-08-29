@@ -1,4 +1,9 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate
+} from "react-router-dom";
 
 import Login from "./pages/Login";
 
@@ -30,6 +35,8 @@ import StudentResult from "./pages/student/StudentResult";
 import StudentResults from "./pages/student/StudentResults";
 
 import ProtectedRoute from "./routes/ProtectedRoute";
+import AdminRoute from "./routes/AdminRoute";
+
 import AdminLayout from "./components/AdminLayout";
 import NotFound from "./pages/NotFound";
 
@@ -38,13 +45,16 @@ function App() {
     <BrowserRouter>
       <Routes>
 
-        {/* LOGIN */}
+        <Route
+          path="/"
+          element={<Navigate to="/login" replace />}
+        />
+
         <Route
           path="/login"
           element={<Login />}
         />
 
-        {/* STUDENT */}
         <Route
           path="/student"
           element={
@@ -81,18 +91,19 @@ function App() {
           }
         />
 
-        {/* ADMIN */}
         <Route
           path="/admin"
-          element={<AdminLayout />}
+          element={
+            <AdminRoute>
+              <AdminLayout />
+            </AdminRoute>
+          }
         >
-
           <Route
             index
             element={<AdminDashboard />}
           />
 
-          {/* STUDENTS */}
           <Route
             path="students"
             element={<StudentsPage />}
@@ -108,7 +119,6 @@ function App() {
             element={<EditStudentPage />}
           />
 
-          {/* COURSES */}
           <Route
             path="courses"
             element={<CoursesPage />}
@@ -124,7 +134,6 @@ function App() {
             element={<EditCoursePage />}
           />
 
-          {/* EXAMS */}
           <Route
             path="exams"
             element={<ExamsPage />}
@@ -140,7 +149,6 @@ function App() {
             element={<EditExamPage />}
           />
 
-          {/* QUESTIONS */}
           <Route
             path="questions"
             element={<QuestionsPage />}
@@ -156,7 +164,6 @@ function App() {
             element={<EditQuestionPage />}
           />
 
-          {/* RESULTS */}
           <Route
             path="results"
             element={<ResultsPage />}
@@ -171,10 +178,8 @@ function App() {
             path="results/edit/:id"
             element={<EditResultPage />}
           />
-
         </Route>
 
-        {/* 404 */}
         <Route
           path="*"
           element={<NotFound />}

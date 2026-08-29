@@ -3,7 +3,6 @@ import AdminSidebar from "./AdminSidebar";
 import { useState, useEffect } from "react";
 
 export default function AdminLayout() {
-
     const [darkMode, setDarkMode] = useState(
         localStorage.getItem("theme") === "dark"
     );

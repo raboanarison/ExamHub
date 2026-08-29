@@ -1,7 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./AdminSidebar.css";
 
 export default function AdminSidebar() {
+    const navigate = useNavigate();
+
+    const logout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("role");
+        navigate("/login");
+    };
+
     return (
         <nav className="admin-navbar">
 
@@ -21,7 +29,7 @@ export default function AdminSidebar() {
             <div className="admin-info">
                 <span>Administrateur</span>
 
-                <button>
+                <button onClick={logout}>
                     Déconnexion
                 </button>
             </div>

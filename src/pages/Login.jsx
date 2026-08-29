@@ -4,36 +4,54 @@ import { useNavigate } from "react-router-dom";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
-  const handleLogin = () => {
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    setError("");
+
     if (!email || !password) {
-      alert("Veuillez remplir tous les champs");
+      setError("Veuillez remplir tous les champs");
       return;
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (
+      email === "admin@examhub.com" &&
+      password === "admin123"
+    ) {
+      localStorage.setItem("token", "admin-token");
+      localStorage.setItem("role", "admin");
 
-    if (!emailRegex.test(email)) {
-      alert("Veuillez entrer une adresse email valide");
+      navigate("/admin");
       return;
     }
 
-    if (password.length < 6) {
-      alert("Le mot de passe doit contenir au moins 6 caractères");
+    if (
+      email === "student@examhub.com" &&
+      password === "student123"
+    ) {
+      localStorage.setItem("token", "student-token");
+      localStorage.setItem("role", "student");
+
+      navigate("/student");
       return;
     }
 
-    localStorage.setItem("token", "fake-token");
-    localStorage.setItem("role", "student");
-
-    navigate("/student");
+    setError("Email ou mot de passe incorrect");
   };
 
   return (
     <div>
       <h1>Connexion</h1>
+
+      {error && (
+        <p style={{ color: "red" }}>
+          {error}
+        </p>
+      )}
 
       <input
         type="email"
@@ -42,7 +60,8 @@ export default function Login() {
         onChange={(e) => setEmail(e.target.value)}
       />
 
-      <br /><br />
+      <br />
+      <br />
 
       <input
         type="password"
@@ -51,7 +70,8 @@ export default function Login() {
         onChange={(e) => setPassword(e.target.value)}
       />
 
-      <br /><br />
+      <br />
+      <br />
 
       <button onClick={handleLogin}>
         Se connecter

@@ -3,154 +3,120 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
-    FaClipboardList,
-    FaEdit,
-    FaTrash,
-    FaPlus
+  FaClipboardList,
+  FaEdit,
+  FaTrash,
+  FaPlus
 } from "react-icons/fa";
 
 export default function ExamsPage() {
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  const [exams, setExams] = useState([]);
 
-    const [exams, setExams] = useState([]);
+  const loadExams = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:3000/api/exams"
+      );
 
-    useEffect(() => {
+      const data = await response.json();
 
-        const savedExams =
-            localStorage.getItem("exams");
+      setExams(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-        if (savedExams) {
+  useEffect(() => {
+    loadExams();
+  }, []);
 
-            setExams(
-                JSON.parse(savedExams)
-            );
-
-        } else {
-
-            const defaultExams = [
-                {
-                    id: 1,
-                    title: "Java",
-                    duration: 60
-                },
-                {
-                    id: 2,
-                    title: "React",
-                    duration: 45
-                },
-                {
-                    id: 3,
-                    title: "Spring Boot",
-                    duration: 90
-                }
-            ];
-
-            localStorage.setItem(
-                "exams",
-                JSON.stringify(defaultExams)
-            );
-
-            setExams(defaultExams);
+  const deleteExam = async (id) => {
+    try {
+      await fetch(
+        `http://localhost:3000/api/exams/${id}`,
+        {
+          method: "DELETE"
         }
+      );
 
-    }, []);
+      loadExams();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    const deleteExam = (id) => {
+  return (
+    <div className="exams-page">
 
-        const updatedExams =
-            exams.filter(
-                exam => exam.id !== id
-            );
+      <div className="page-header">
+        <h1>Gestion des examens</h1>
 
-        setExams(updatedExams);
+        <button
+          className="add-btn"
+          onClick={() =>
+            navigate("/admin/exams/create")
+          }
+        >
+          <FaPlus />
+          Ajouter examen
+        </button>
+      </div>
 
-        localStorage.setItem(
-            "exams",
-            JSON.stringify(updatedExams)
-        );
-    };
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Examen</th>
+            <th>Durée</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
 
-    return (
-        <div className="exams-page">
+        <tbody>
+          {exams.map((exam) => (
+            <tr key={exam.id}>
+              <td>{exam.id}</td>
 
-            <div className="page-header">
+              <td>
+                <FaClipboardList />
+                {" "}
+                {exam.title}
+              </td>
 
-                <h1>Gestion des examens</h1>
+              <td>
+                {exam.duration} min
+              </td>
+
+              <td className="actions">
 
                 <button
-                    className="add-btn"
-                    onClick={() =>
-                        navigate("/admin/exams/create")
-                    }
+                  className="edit-btn"
+                  onClick={() =>
+                    navigate(
+                      `/admin/exams/edit/${exam.id}`
+                    )
+                  }
                 >
-                    <FaPlus />
-                    Ajouter examen
+                  <FaEdit />
                 </button>
 
-            </div>
+                <button
+                  className="delete-btn"
+                  onClick={() =>
+                    deleteExam(exam.id)
+                  }
+                >
+                  <FaTrash />
+                </button>
 
-            <table>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
 
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Examen</th>
-                        <th>Durée</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-
-                    {exams.map((exam) => (
-
-                        <tr key={exam.id}>
-
-                            <td>{exam.id}</td>
-
-                            <td>
-                                <FaClipboardList />
-                                {" "}
-                                {exam.title}
-                            </td>
-
-                            <td>
-                                {exam.duration} min
-                            </td>
-
-                            <td className="actions">
-
-                                <button
-                                    className="edit-btn"
-                                    onClick={() =>
-                                        navigate(
-                                            `/admin/exams/edit/${exam.id}`
-                                        )
-                                    }
-                                >
-                                    <FaEdit />
-                                </button>
-
-                                <button
-                                    className="delete-btn"
-                                    onClick={() =>
-                                        deleteExam(exam.id)
-                                    }
-                                >
-                                    <FaTrash />
-                                </button>
-
-                            </td>
-
-                        </tr>
-
-                    ))}
-
-                </tbody>
-
-            </table>
-
-        </div>
-    );
+    </div>
+  );
 }

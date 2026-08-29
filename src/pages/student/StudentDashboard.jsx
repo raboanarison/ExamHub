@@ -9,10 +9,12 @@ export default function StudentDashboard() {
 
   useEffect(() => {
 
-    const savedExams =
-      JSON.parse(localStorage.getItem("exams")) || [];
-
-    setExams(savedExams);
+    fetch("http://localhost:3000/api/exams")
+      .then((response) => response.json())
+      .then((data) => setExams(data))
+      .catch((error) =>
+        console.error(error)
+      );
 
   }, []);
 
@@ -37,7 +39,6 @@ export default function StudentDashboard() {
             key={exam.id}
             className="exam-card"
           >
-
             <h3>{exam.title}</h3>
 
             <p>
@@ -52,7 +53,6 @@ export default function StudentDashboard() {
             </Link>
 
             <hr />
-
           </div>
 
         ))

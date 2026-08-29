@@ -3,72 +3,81 @@ import { useNavigate } from "react-router-dom";
 import "./CreateExamPage.css";
 
 export default function CreateExamPage() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const [exam, setExam] = useState({
-        title: "",
-        duration: ""
+  const [exam, setExam] = useState({
+    title: "",
+    duration: ""
+  });
+
+  const handleChange = (e) => {
+    setExam({
+      ...exam,
+      [e.target.name]: e.target.value
     });
+  };
 
-    const handleChange = (e) => {
-        setExam({
-            ...exam,
-            [e.target.name]: e.target.value
-        });
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    try {
+      const response = await fetch(
+        "http://localhost:3000/api/exams",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+          body: JSON.stringify(exam)
+        }
+      );
 
-        const exams =
-            JSON.parse(localStorage.getItem("exams")) || [];
-
-        const newExam = {
-            id: Date.now(),
-            ...exam
-        };
-
-        const updatedExams = [...exams, newExam];
-
-        localStorage.setItem(
-            "exams",
-            JSON.stringify(updatedExams)
+      if (!response.ok) {
+        throw new Error(
+          "Erreur lors de la création"
         );
+      }
 
-        navigate("/admin/exams");
-    };
+      navigate("/admin/exams");
 
-    return (
-        <div className="create-exam-page">
+    } catch (error) {
+      console.error(error);
+      alert("Impossible de créer l'examen");
+    }
+  };
 
-            <h1>Ajouter un examen</h1>
+  return (
+    <div className="create-exam-page">
 
-            <form onSubmit={handleSubmit}>
+      <h1>Ajouter un examen</h1>
 
-                <input
-                    type="text"
-                    name="title"
-                    placeholder="Nom examen"
-                    value={exam.title}
-                    onChange={handleChange}
-                    required
-                />
+      <form onSubmit={handleSubmit}>
 
-                <input
-                    type="number"
-                    name="duration"
-                    placeholder="Durée (minutes)"
-                    value={exam.duration}
-                    onChange={handleChange}
-                    required
-                />
+        <input
+          type="text"
+          name="title"
+          placeholder="Nom examen"
+          value={exam.title}
+          onChange={handleChange}
+          required
+        />
 
-                <button type="submit">
-                    Enregistrer
-                </button>
+        <input
+          type="number"
+          name="duration"
+          placeholder="Durée (minutes)"
+          value={exam.duration}
+          onChange={handleChange}
+          required
+        />
 
-            </form>
+        <button type="submit">
+          Enregistrer
+        </button>
 
-        </div>
-    );
+      </form>
+
+    </div>
+  );
 }

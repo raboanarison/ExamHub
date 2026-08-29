@@ -22,14 +22,20 @@ app.use('/api/courses', courseRoutes);
 app.use('/api/exams', examRoutes);
 
 app.get('/', (req, res) => {
-  res.json({ message: 'API QCM en ligne fonctionnelle.' });
+  res.json({
+    message: 'API QCM en ligne fonctionnelle.'
+  });
 });
 
 app.get('/api/health', async (req, res) => {
   try {
     await pool.query('SELECT 1');
-    res.json({ status: 'ok', db: 'connected' });
-  } catch (err) {
+
+    res.json({
+      status: 'ok',
+      db: 'connected'
+    });
+  } catch {
     res.status(500).json({
       status: 'error',
       message: 'DB non disponible'
@@ -44,15 +50,10 @@ app.use((
   next: express.NextFunction
 ) => {
   console.error(err);
+
   res.status(500).json({
     message: 'Erreur interne du serveur'
   });
-});
-
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log(`Serveur démarré sur http://localhost:${PORT}`);
 });
 
 export default app;

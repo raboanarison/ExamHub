@@ -6,7 +6,12 @@ const userRepository = new UserRepository();
 
 export class AuthService {
     async login(email: string, password: string) {
+
+        console.log("EMAIL RECU :", email);
+
         const user = await userRepository.findByEmail(email);
+
+        console.log("USER TROUVE :", user);
 
         if (!user) {
             const err: any = new Error('Email ou mot de passe incorrect');
@@ -14,13 +19,15 @@ export class AuthService {
             throw err;
         }
 
-        if (!user.is_active) {
-            const err: any = new Error('Ce compte a été désactivé');
-            err.status = 403;
-            throw err;
-        }
+        console.log("HASH BDD :", user.password_hash);
 
-        const validPassword = await comparePassword(password, user.password_hash);
+        const validPassword = await comparePassword(
+            password,
+            user.password_hash
+        );
+
+        console.log("MOT DE PASSE VALIDE :", validPassword);
+
         if (!validPassword) {
             const err: any = new Error('Email ou mot de passe incorrect');
             err.status = 401;
